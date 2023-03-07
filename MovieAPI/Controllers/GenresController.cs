@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieProject.Data;
 using MovieProject.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+
 
 namespace MovieProject.Controllers
 {
@@ -18,13 +17,6 @@ namespace MovieProject.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        //private MovieDbContext _db;
-        ////Constructor for class GenresController to set MovieDbContext already instatntiated equal to this class
-        //public GenresController(MovieDbContext db)
-        //{
-        //    _db = db;
-        //}
-
         /// <summary>
         /// Get a list of genre items
         /// </summary>
@@ -34,7 +26,6 @@ namespace MovieProject.Controllers
         {
             var genres = _unitOfWork.GenreRepository.Get();
             return genres;
-            //return _db.Genres;
         }
 
 
@@ -48,10 +39,6 @@ namespace MovieProject.Controllers
         public ActionResult GetGenre(int genreId)
         {
             Genres genre = _unitOfWork.GenreRepository.GetByID(genreId);
-
-            //var genre = _db.Genres
-            //    .Where(g => g.GenreId == genreId)
-            //    .FirstOrDefault();
 
             if (genre == null)
             {
@@ -79,8 +66,7 @@ namespace MovieProject.Controllers
             _unitOfWork.GenreRepository.Insert(tempGenre);
             _unitOfWork.Save();
 
-            //_db.Genres.Add(tempGenre);
-            //_db.SaveChanges();
+           
             return Accepted(tempGenre);
         }
 
@@ -102,13 +88,13 @@ namespace MovieProject.Controllers
             if (movies.ToList().Count > 0)
             {
                 return Problem(statusCode: 400, detail: "Cannot delete genre; other table has dependency on it", title: "400 Error");
-                //return BadRequest("Cannot delete rating; other table has dependency on it");
+              
             }
 
             if (genres == null)
             {
                 return Problem(statusCode: 400, detail: "Could not find object", title: "400 Error");
-                //return BadRequest("Could not find object");
+              
             }
 
             _unitOfWork.GenreRepository.Delete(genreId);

@@ -14,7 +14,7 @@ namespace MovieProject.Models
         [ForeignKey("RatingId")]
         public Ratings Ratings { get; set; } = default!;
 
-        public ICollection<MovieGenres> MovieGenres { get; set; }
+        public ICollection<MovieGenres>? MovieGenres { get; set; }
     }
 }
 
