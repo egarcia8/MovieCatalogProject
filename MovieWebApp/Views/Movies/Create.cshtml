@@ -1,0 +1,78 @@
+﻿
+<link rel="stylesheet" href="~/css/MoviesCreate.css">
+
+<h1>Create</h1>
+
+<h4>Movies</h4>
+<hr />
+<!--Modal-->
+<div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalContent">
+            <div class="modal-body">
+                <p>Your edit was successful.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="onAddAgain()">Add Another</button>
+                <button type="button" class="btn btn-danger" onclick="onBack()">Back to Movies</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Modal-->
+
+<form id="movieCreateForm">
+    <div class="form-group container-fluid">
+        <label for="Title" class="col-form-label"><b>Title:</b></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="movieTitle" name="movieTitle" />
+        </div>
+    </div>
+    <div class="form-group container-fluid">
+        <label for="Description" class="col-form-label"><b>Description:</b></label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="movieDescription" name="movieDescription" />
+        </div>
+    </div>
+    <div class="form-group container-fluid">
+        <label for="Rating" class="col-form-label"><b>Rating:</b></label>
+        <select name="movieRating" id="movieRating" class="form-control minimal">
+            <option value="">Select Rating</option>
+        </select>
+    </div>
+    <div class="form-group container-fluid">
+        <div class="row">
+            <div class="col-md">
+                <label for="movieGenreSelected" class="col-form-label"><b>Genre:</b></label>
+                <div class="list-group" id="movieGenreSelected">
+                    @*list dynamically populated with js*@
+                </div>
+            </div>
+            <div class="col-md">
+                <a href="#" class="previous round" onclick="toGenreSelected()">&#8249;</a>
+                <a href="#" class="next round" onclick="toGenreList()">&#8250;</a>
+            </div>
+
+            <div class="col-md">
+                <label for="movieGenreList" class="col-form-label"><b>Genre List:</b></label>
+                <div class="list-group" id="movieGenreList">
+                    @*list dynamically populated with js*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group container-fluid">
+        <div>
+            <button type="button" class="btn btn-primary mt-3" onclick="onCreateMovie()">Save Movie</button>
+            <button type="button" class="btn btn-outline-primary mt-3" onclick="window.location.href='/Movies'">Back to Movies</button>
+        </div>
+
+    </div>
+</form>
+
+<script type="text/javascript" src="~/js/MoviesCreate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+        integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+

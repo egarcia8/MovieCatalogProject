@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using MovieProject.Data;
-using System.Reflection;
+//using System.Reflection;
 
+var policy = "policy";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +19,16 @@ builder.Services.AddDbContext<MovieDbContext>(
         opt.UseSqlServer(builder.Configuration.GetConnectionString("MovieDatabase")); //GetConnectionString looking for ConnectionString property named MovieDatabase
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(policy,
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7167")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+        });
+});
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -30,9 +41,9 @@ builder.Services.AddSwaggerGen(options =>
         Description = "An ASP.NET Core Web API for managing movie items"
     });
 
-    // using System.Reflection;
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+    //// using System.Reflection;
+    //var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 var app = builder.Build();
@@ -49,5 +60,9 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseRouting();
+
+app.UseCors(policy);
 
 app.Run();

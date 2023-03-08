@@ -1,0 +1,56 @@
+﻿
+<link rel="stylesheet" href="~/css/RatingsEdit.css">
+
+<h1>Edit</h1>
+
+<h4>Ratings</h4>
+<hr />
+
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only"></span>
+    </div>
+</div>
+<form id="ratingEditForm">
+    <div class="form-group">
+        <label for="rating" class="col-form-label"><b>Rating:</b></label>
+        <input type="text" class="form-control" id="ratingEdit" name="ratingEdit" />
+        <div>
+            <button type="button" class="btn btn-primary mt-3" onclick="onEditRating()">Save Changes</button>
+            <button type="button" class="btn btn-outline-primary mt-3" onclick="window.location.href='/Ratings'">Back to Ratings</button>
+        </div>
+    </div>
+</form>
+
+<!--Modal-->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalContent">
+       
+            <div class="modal-body">
+                <p>Your edit was successful.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="onEditAgain()">Edit Again</button>
+                <button type="button" class="btn btn-danger" onclick="onBack()">Back to Ratings</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Modal-->
+
+<script>
+    window.ratingEditObj = {
+        ratingId: @Model
+        }
+</script>
+
+<script type="text/javascript" src="~/js/RatingsEdit.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+        integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+
+
